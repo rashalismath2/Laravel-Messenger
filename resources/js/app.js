@@ -8,10 +8,11 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-import PostApp from "./PostApp.vue";
-Vue.component('App',PostApp);
+export const bus=new Vue();
 
+import App from "./App.vue";
+Vue.component("App",App);
 
 const app = new Vue({
-    el: '#post',
+    el: '#app',
 });

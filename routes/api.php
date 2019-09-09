@@ -9,8 +9,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::middleware("auth:api")->group(function(){
-    Route::post("post/{post}/comment","CommentController@store");
-    Route::get("post/{post}/comment","CommentController@index");
-
+    Route::get('/contacts',"ContactsController@get");
+    Route::get('/messages/{contact}',"MessageController@get");
 });
 
