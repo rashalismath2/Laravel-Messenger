@@ -46,7 +46,7 @@ export default {
         flex:2;
         max-height:600px;
         overflow-y: scroll;
-        border-left:1px solid black;
+        border-left:1px solid #bfbaba;
            
     }
 
@@ -62,7 +62,7 @@ export default {
     #contact{
         
         display:flex;
-        border-bottom:1px solid black;
+        border-bottom:1px solid #bfbaba;
         height: 80px;
         cursor:pointer
     }

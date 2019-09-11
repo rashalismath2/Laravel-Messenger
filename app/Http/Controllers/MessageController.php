@@ -16,4 +16,12 @@ class MessageController extends Controller
 
         return response()->json($messages)->setStatusCode(200);
     }
+
+    public function post(Request $request){
+        $message=Message::create(['to'=>$request->to,
+                                        'from'=>auth()->user()->id,
+                                            'body'=>$request->message]);
+
+        return response()->json($message)->setStatusCode(200);
+    }
 }

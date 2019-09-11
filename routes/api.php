@@ -11,5 +11,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::middleware("auth:api")->group(function(){
     Route::get('/contacts',"ContactsController@get");
     Route::get('/messages/{contact}',"MessageController@get");
+    Route::post('/messages',"MessageController@post");
 });
 
