@@ -1968,15 +1968,20 @@ __webpack_require__.r(__webpack_exports__);
       _this.selectedContact = contact;
     });
     _app__WEBPACK_IMPORTED_MODULE_1__["bus"].$on('user', function (user) {
-      console.log(user);
-      _this.user = user;
+      console.log(user); // this.user=user
     });
+  },
+  props: {
+    user: {
+      type: Object,
+      required: true
+    }
   },
   data: function data() {
     return {
       selectedContact: "",
-      message: "",
-      user: ''
+      message: "" // user:''
+
     };
   },
   components: {
@@ -2047,13 +2052,17 @@ __webpack_require__.r(__webpack_exports__);
 
       _this.GetMessages(contact);
     });
-    _app__WEBPACK_IMPORTED_MODULE_0__["bus"].$on('user', function (user) {
-      console.log(user);
-      _this.user = user;
+    _app__WEBPACK_IMPORTED_MODULE_0__["bus"].$on('user', function (user) {// this.user=user;
     });
     _app__WEBPACK_IMPORTED_MODULE_0__["bus"].$on('newMessage', function (message) {
       _this.messages.push(message);
     });
+  },
+  props: {
+    user: {
+      type: Object,
+      required: true
+    }
   },
   watch: {
     selectedContact: function selectedContact() {
@@ -2066,10 +2075,13 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       selectedContact: '',
-      user: {},
+      // user:{},
       messages: [],
       message: ''
     };
+  },
+  mounted: function mounted() {
+    this.listen();
   },
   methods: {
     GetMessages: function GetMessages(contact) {
@@ -2089,6 +2101,16 @@ __webpack_require__.r(__webpack_exports__);
         var el = _this3.$refs.conv;
         el.scrollTop = el.scrollHeight - el.clientHeight;
       }, 50);
+    },
+    listen: function listen() {
+      var _this4 = this;
+
+      console.log("user " + JSON.stringify(this.user.id));
+      Echo["private"]("messages." + this.user.id).listen('NewMessage', function (message) {
+        console.log("New message have been broadcasted " + JSON.stringify(message));
+
+        _this4.messages.push(message.message);
+      });
     }
   }
 });
@@ -48435,7 +48457,7 @@ var render = function() {
     "div",
     { attrs: { id: "components" } },
     [
-      _c("Conversation"),
+      _c("Conversation", { attrs: { user: _vm.user } }),
       _vm._v(" "),
       _c("ContactList", { attrs: { contactList: _vm.contactList } })
     ],
@@ -48539,7 +48561,7 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("MessageFeed"),
+      _c("MessageFeed", { attrs: { user: _vm.user } }),
       _vm._v(" "),
       _vm.selectedContact != ""
         ? _c("div", { attrs: { id: "send-message" } }, [
@@ -61017,15 +61039,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!**************************************************!*\
   !*** ./resources/js/components/Conversation.vue ***!
   \**************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Conversation_vue_vue_type_template_id_63f956ee_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Conversation.vue?vue&type=template&id=63f956ee&scoped=true& */ "./resources/js/components/Conversation.vue?vue&type=template&id=63f956ee&scoped=true&");
 /* harmony import */ var _Conversation_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Conversation.vue?vue&type=script&lang=js& */ "./resources/js/components/Conversation.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Conversation_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Conversation_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _Conversation_vue_vue_type_style_index_0_id_63f956ee_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Conversation.vue?vue&type=style&index=0&id=63f956ee&lang=scss&scoped=true& */ "./resources/js/components/Conversation.vue?vue&type=style&index=0&id=63f956ee&lang=scss&scoped=true&");
+/* empty/unused harmony star reexport *//* harmony import */ var _Conversation_vue_vue_type_style_index_0_id_63f956ee_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Conversation.vue?vue&type=style&index=0&id=63f956ee&lang=scss&scoped=true& */ "./resources/js/components/Conversation.vue?vue&type=style&index=0&id=63f956ee&lang=scss&scoped=true&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -61057,7 +61078,7 @@ component.options.__file = "resources/js/components/Conversation.vue"
 /*!***************************************************************************!*\
   !*** ./resources/js/components/Conversation.vue?vue&type=script&lang=js& ***!
   \***************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

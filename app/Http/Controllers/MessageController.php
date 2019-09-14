@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Message;
 use DB;
+use App\Events\NewMessage;
 
 class MessageController extends Controller
 {
@@ -21,7 +22,7 @@ class MessageController extends Controller
         $message=Message::create(['to'=>$request->to,
                                         'from'=>auth()->user()->id,
                                             'body'=>$request->message]);
-
+        broadcast(new NewMessage($message))->toOthers();
         return response()->json($message)->setStatusCode(200);
     }
 }

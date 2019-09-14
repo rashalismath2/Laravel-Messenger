@@ -1,7 +1,7 @@
 <template>
     <div id="conversation">
         <h1 id="conversation-contact">{{selectedContact!="" ? selectedContact.name : "Select a contact"}}</h1>
-        <MessageFeed />
+        <MessageFeed v-bind:user="user"/>
         <div v-if="selectedContact!=''" id="send-message">
             <textarea placeholder="Message.." v-on:keydown.enter="send" v-model="message"></textarea>
         </div>
@@ -20,14 +20,20 @@ export default {
         })
         bus.$on('user',(user)=>{
             console.log(user);
-            this.user=user
+            // this.user=user
         })
+    },
+    props :{
+        user:{
+            type:Object,
+            required:true
+        }
     },
     data() {
         return {
             selectedContact:"",
             message:"",
-            user:''
+            // user:''
         }
     },
     components:{

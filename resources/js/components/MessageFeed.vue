@@ -23,14 +23,18 @@ export default {
            
         });
         bus.$on('user',(user)=>{
-            console.log(user);
-            this.user=user;
-          
+            // this.user=user;
         });
         bus.$on('newMessage',(message)=>{
             this.messages.push(message)
           
         });
+    },
+    props:{
+        user:{
+            type:Object,
+            required:true
+        }
     },
     watch:{
         selectedContact:function(){
@@ -43,10 +47,13 @@ export default {
     data() {
         return {
             selectedContact:'',
-            user:{},
+            // user:{},
             messages:[],
             message:''
         }
+    },
+    mounted(){
+        this.listen();
     },
     methods:{
         GetMessages(contact){
@@ -62,6 +69,13 @@ export default {
                 var el=this.$refs.conv;
                 el.scrollTop=el.scrollHeight-el.clientHeight
             },50)
+        },
+        listen(){
+            console.log("user "+JSON.stringify(this.user.id));
+            Echo.private("messages."+this.user.id).listen('NewMessage',(message)=>{
+                console.log("New message have been broadcasted "+JSON.stringify(message));
+                this.messages.push(message.message);
+            })
         } 
     } 
 }

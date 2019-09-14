@@ -1,6 +1,6 @@
 <template>
     <div id="components">
-        <Conversation />
+        <Conversation v-bind:user="user"/>
         <ContactList v-bind:contactList="contactList" />
     </div>
 </template>
