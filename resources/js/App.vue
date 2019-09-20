@@ -1,7 +1,7 @@
 <template>
     <div id="components">
         <Conversation v-bind:user="user"/>
-        <ContactList v-bind:contactList="contactList" />
+        <ContactList v-bind:user="user" v-bind:contactList="contactList" />
     </div>
 </template>
 

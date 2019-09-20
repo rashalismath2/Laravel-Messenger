@@ -2083,6 +2083,13 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.listen();
   },
+  computed: {// ShowMessages(){
+    //     this.messages.filter((message)=>{
+    //     console.log(`selected contact ${this.selectedContact.id}  message gtom ${message.from}` );
+    //         return this.selectedContact.id==message.from
+    //     })
+    // }
+  },
   methods: {
     GetMessages: function GetMessages(contact) {
       var _this2 = this;
@@ -48459,7 +48466,9 @@ var render = function() {
     [
       _c("Conversation", { attrs: { user: _vm.user } }),
       _vm._v(" "),
-      _c("ContactList", { attrs: { contactList: _vm.contactList } })
+      _c("ContactList", {
+        attrs: { user: _vm.user, contactList: _vm.contactList }
+      })
     ],
     1
   )
@@ -48623,22 +48632,30 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { ref: "conv", attrs: { id: "conv" } }, [
-    _c(
-      "div",
-      { attrs: { id: "conversation-messages" } },
-      _vm._l(_vm.messages, function(messagelist, indexlist) {
-        return _c(
-          "li",
-          {
-            key: indexlist,
-            class:
-              "message" + (messagelist.to == _vm.user.id ? "recieved" : "sent")
-          },
-          [_c("p", [_vm._v(_vm._s(messagelist.body))])]
+    _vm.selectedContact
+      ? _c(
+          "div",
+          { attrs: { id: "conversation-messages" } },
+          _vm._l(_vm.messages, function(messagelist, indexlist) {
+            return _c(
+              "li",
+              {
+                key: indexlist,
+                class:
+                  "message" +
+                  (messagelist.to == _vm.user.id ? "recieved" : "sent")
+              },
+              [
+                _vm.user.id == messagelist.from ||
+                _vm.selectedContact.id == messagelist.from
+                  ? _c("p", [_vm._v(_vm._s(messagelist.body))])
+                  : _vm._e()
+              ]
+            )
+          }),
+          0
         )
-      }),
-      0
-    )
+      : _vm._e()
   ])
 }
 var staticRenderFns = []

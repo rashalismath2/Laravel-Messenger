@@ -1,8 +1,8 @@
 <template>
     <div id="conv" ref="conv">
-        <div id="conversation-messages">
+        <div v-if="selectedContact" id="conversation-messages">
             <li v-bind:class="`message${messagelist.to==user.id?'recieved':'sent'}`" v-for="(messagelist,indexlist) in messages" v-bind:key="indexlist">
-                <p>{{messagelist.body}}</p>
+                <p v-if="user.id==messagelist.from || selectedContact.id==messagelist.from">{{messagelist.body}}</p>
             </li>
         </div>
     </div>
@@ -27,7 +27,7 @@ export default {
         });
         bus.$on('newMessage',(message)=>{
             this.messages.push(message)
-          
+ 
         });
     },
     props:{
@@ -54,6 +54,15 @@ export default {
     },
     mounted(){
         this.listen();
+    },
+    computed:{
+        // ShowMessages(){
+
+        //     this.messages.filter((message)=>{
+        //     console.log(`selected contact ${this.selectedContact.id}  message gtom ${message.from}` );
+        //         return this.selectedContact.id==message.from
+        //     })
+        // }
     },
     methods:{
         GetMessages(contact){
