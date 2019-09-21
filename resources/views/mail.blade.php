@@ -7,6 +7,6 @@
     <title>Emails</title>
 </head>
 <body>
-  <h1>Welcome to our website</h1>
+  <h1>{{$username}}, Welcome to our website</h1>
 </body>
 </html>
