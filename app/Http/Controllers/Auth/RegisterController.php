@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Events\SendNewWelcomeEmailEvent;
+use App\Jobs\SendEmailJob;
 
 class RegisterController extends Controller
 {
@@ -62,7 +63,7 @@ class RegisterController extends Controller
             'api_token' => bin2hex(openssl_random_pseudo_bytes(30)),
         ]);
         
-        event(new SendNewWelcomeEmailEvent($user));
+        dispatch(new SendEmailJob($user));
             
         return $user; 
     }
